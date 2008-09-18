@@ -48,7 +48,7 @@ public class ShouldCategory {
 		}
 	}
 	
-	public static ShouldObject should(Object o) {
+	public static ShouldObject getShould(Object o) {
 		return new ShouldObject(o);
 	}
 	

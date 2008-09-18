@@ -14,22 +14,26 @@ import org.tspec.closure.SubjectClosure;
 import org.tspec.dom.Story;
 import org.tspec.runtime.MustObject;
 import org.tspec.runtime.ShouldObject;
+import org.tspec.runtime.ErrorListener;
 
 
 public class ThaiSpecBinding extends Binding {
 
-	public ThaiSpecBinding() {
+	private ErrorListener el;
+
+	public ThaiSpecBinding(ErrorListener el) {
 		super();
+		this.el = el;
 		init();
 	}
 
 	private void init() {
 		Story root = new Story();
-		setVariable("เรื่อง", new SubjectClosure(root));		
+		setVariable("เรื่อง", new SubjectClosure(root));
 		setVariable("อธิบาย", new ScenarioClosure(root));
 		setVariable("ก่อน", new BeforeClosure(root));
 		setVariable("หลัง", new AfterClosure(root));
-		setupShouldAndMust();			
+		setupShouldAndMust();
 	}
 
 	private void setupShouldAndMust() {
@@ -39,17 +43,39 @@ public class ThaiSpecBinding extends Binding {
 		Closure shouldClosure = new Closure(null){
 			@SuppressWarnings("unused")
 			public ShouldObject doCall() {
-				return new ShouldObject(this.getDelegate()); 				
+				ShouldObject obj = new ShouldObject(this.getDelegate());
+				obj.setEl(el);
+				return obj;
 			}
 		};
-		Closure mustClosure = new Closure(null){
+/*		Closure mustClosure = new Closure(null){
 			@SuppressWarnings("unused")
 			public MustObject doCall() {
-				return new MustObject(this.getDelegate()); 				
+				return new MustObject(this.getDelegate());
 			}
-		};		
+		}; */
+		Closure shouldBe = new Closure(null){
+			@SuppressWarnings("unused")
+			public Object doCall(Object o) {
+//				System.out.println("=================== >>> I'm being called");
+//				System.out.println("so what's it : " + this.getDelegate());
+				ShouldObject obj = new ShouldObject(this.getDelegate(), true);
+				obj.setEl(el);
+				return obj.equals(o);
+			}
+		};
+		Closure shouldNotBe = new Closure(null){
+			@SuppressWarnings("unused")
+			public Object doCall(Object o) {
+				ShouldObject obj = new ShouldObject(this.getDelegate());
+				obj.setEl(el);
+				return obj.equals(o);
+			}
+		};
 		mc.setProperty("getShould", shouldClosure);
-		mc.setProperty("getMust", mustClosure);
+//		mc.setProperty("getMust", mustClosure);
+		mc.setProperty("shouldBe", shouldBe);
+		mc.setProperty("shouldNotBe", shouldNotBe);
 	}
-	
+
 }

@@ -1,16 +1,15 @@
 package org.tspec.runtime;
 
 public class ReportHelper {
-	
-	static void reportError(Object object, Object obj2, String message) {
-		for(StackTraceElement ste: Thread.currentThread().getStackTrace()) {
+
+	static void reportError(ErrorListener el, StackTraceElement[] traces, String message) {
+		for(StackTraceElement ste: traces) {
 			if(ste.getFileName()!=null && ste.getFileName().lastIndexOf("Story.groovy")!=-1) {
-				ErrorListener.v().addError(
-					ste.getFileName()+":"+ste.getLineNumber() + " / "
-					+ object + " " + message + " " + obj2
+				el.addError(
+					ste.getFileName()+" at line "+ste.getLineNumber() + " : " + message
 				);
 				break;
-			}				
+			}
 		}
 	}
 
