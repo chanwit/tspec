@@ -1,0 +1,54 @@
+version = "0.1"
+outputJar = "tspec-${version}.jar"
+
+includeTargets << gant.targets.Clean
+cleanPattern << ['**/*~', '**/*.bak', outputJar]
+cleanDirectory << 'bin'
+
+groovyHome = System.properties.'groovy.home'
+if ( ( groovyHome == null ) || ( groovyHome == '' ) ) {
+  println ( 'Real problem: property groovy.home is not set and this is Gant executing.' )
+  return
+}
+
+compileJarSet = 'compileJarSet'
+ant.path ( id : compileJarSet ) {
+  fileset ( dir : groovyHome + '/lib' , includes : 'groovy*.jar' )
+  fileset ( dir : groovyHome + '/lib' , includes : 'commons-cli*.jar' )
+  fileset ( dir : groovyHome + '/lib' , includes : 'asm*.jar' )
+  fileset ( dir : groovyHome + '/lib' , includes : 'ant*.jar' )  // Picks up antlr as well as ant. This is intended.
+}
+
+testJarSet = 'testJarSet'
+ant.path ( id : testJarSet ) {
+  path ( refid : compileJarSet )
+  fileset ( dir : groovyHome + '/lib' , includes : 'junit*.jar' )
+}
+
+
+target(compile: 'Compile TSpec') {
+  ant.mkdir ( dir : 'bin' )
+  ant.taskdef ( name : 'groovyc' , classname : 'org.codehaus.groovy.ant.Groovyc' , classpathref : compileJarSet )
+  ant.groovyc ( srcdir : 'src/java' , destdir : 'bin' , fork : 'false' , failonerror : 'true', encoding:'UTF-8' ) {
+    classpath {
+      pathelement ( location : 'bin' )
+      path ( refid : compileJarSet )
+    }
+    javac ( source : '1.5' , target : '1.5' , debug : 'on' )
+  }
+}
+
+target(jar: 'Build a TSpec jar') {
+	depends(compile)
+	ant.jar (basedir:'bin', destfile:outputJar)
+}
+
+target('local-test':'Copy to test dir') {
+	depends(jar)
+	copy(file:outputJar, todir:"c:\\grails\\land\\lib")
+}
+
+setDefaultTarget(compile)
+
+
+
