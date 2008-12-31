@@ -3,17 +3,17 @@ README
 
 TSpec is a non-English behaviour-driven development (BDD) framework, designed for Thai language.
 It is written in Groovy, running on JVM, and working with both Groovy and Java programs.
-According to Wikipedia, TSpec seems to be the first non-English BDD framework (but it is not a strong claim here).
+According to Wikipedia, TSpec seems to be the first and only non-English BDD framework
+(but it is not a strong claim here).
 
 TSpec comes with 2 modes, as a stand-lone program and a Grails plugin.
 
-
-Thai README
-===========
+README ภาษาไทย
+============
 
 TSpec เป็น BDD เฟรมเวิร์คที่ออกแบบมาเพื่อให้ใช้กับภาษาไทย โดยการเขียนโปรแกรมยังเป็นภาษา Groovy หรือ Java
 แต่ตัวภาษาเฉพาะทางซึ่งไปกำกับพฤติกรรมนั้นสามารถเขียนเป็นภาษาไทยได้
 
-TSpecเป็น BDD เฟรมเวิร์คตัวแรกที่สนันสนุนภาษาอื่นที่ไม่ใช่ภาษาอังกฤษ : ข้อมูลอ้างอิงจาก Wikipedia
+TSpecเป็น BDD เฟรมเวิร์คตัวแรกและตัวเดียวที่สนันสนุนภาษาอื่นที่ไม่ใช่ภาษาอังกฤษ : ข้อมูลอ้างอิงจาก Wikipedia
 
 TSpec ทำงานได้สองลักษณะคือ ใช้งานปกติ หรือใช้เป็นปลั๊กอินของเกรลส์
