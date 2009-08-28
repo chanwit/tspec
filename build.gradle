@@ -1,0 +1,8 @@
+usePlugin 'groovy'
+usePlugin 'eclipse'
+
+version = '0.2'
+
+dependencies {
+    groovy      group: 'org.codehaus.groovy', name: 'groovy-all',     version: '1.6.4'
+}
