@@ -1,4 +1,4 @@
-version = "0.1"
+version = "0.2"
 outputJar = "tspec-${version}.jar"
 
 includeTargets << gant.targets.Clean
