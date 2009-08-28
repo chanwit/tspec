@@ -43,11 +43,6 @@ target(jar: 'Build a TSpec jar') {
 	ant.jar (basedir:'bin', destfile:outputJar)
 }
 
-target('local-test':'Copy to test dir') {
-	depends(jar)
-	copy(file:outputJar, todir:"c:\\grails\\land\\lib")
-}
-
 setDefaultTarget(compile)
 
 

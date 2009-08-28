@@ -29,7 +29,7 @@ public class ThaiSpecBinding extends Binding {
 
 	private void init() {
 		Story root = new Story();
-		setVariable("เรื่อง", new SubjectClosure(root));
+		setVariable("เรื่อง",  new SubjectClosure(root));
 		setVariable("อธิบาย", new ScenarioClosure(root));
 		setVariable("ก่อน", new BeforeClosure(root));
 		setVariable("หลัง", new AfterClosure(root));
