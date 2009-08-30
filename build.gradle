@@ -3,6 +3,19 @@ usePlugin 'eclipse'
 
 version = '0.2'
 
+repositories {
+    mavenCentral()
+    mavenRepo urls: ['http://repository.codehaus.org/', 'http://download.java.net/maven/2/']
+}
+
 dependencies {
     groovy      group: 'org.codehaus.groovy', name: 'groovy-all',     version: '1.6.4'
+    testCompile group: 'junit',               name: 'junit',          version: '3.8.2'
+}
+
+compile {
+    groovyOptions.encoding = "utf-8"
+}
+compileTests {
+    groovyOptions.encoding = "utf-8"
 }
