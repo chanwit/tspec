@@ -1,0 +1,8 @@
+.classpath
+.eprj
+.gradle/
+.project
+.settings/
+bin/
+build/
+input/
