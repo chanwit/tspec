@@ -1,21 +1,18 @@
-usePlugin 'groovy'
-usePlugin 'eclipse'
+apply plugin: 'groovy'
+apply plugin: 'eclipse'
 
-version = '0.2'
+version = '0.3'
 
 repositories {
     mavenCentral()
-    mavenRepo urls: ['http://repository.codehaus.org/', 'http://download.java.net/maven/2/']
 }
 
 dependencies {
-    groovy      group: 'org.codehaus.groovy', name: 'groovy-all',     version: '1.6.4'
+    groovy      group: 'org.codehaus.groovy', name: 'groovy-all',     version: '1.7.8'
     testCompile group: 'junit',               name: 'junit',          version: '3.8.2'
 }
 
-compile {
-    groovyOptions.encoding = "utf-8"
-}
-compileTests {
-    groovyOptions.encoding = "utf-8"
+configure([compileGroovy, compileTestGroovy]) {
+    // groovyOptions.fork(memoryInitialSize: '128M', memoryMaximumSize: '1G')
+    groovyOptions.encoding = "UTF-8"
 }
