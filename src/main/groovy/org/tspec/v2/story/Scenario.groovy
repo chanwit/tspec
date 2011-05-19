@@ -4,7 +4,7 @@ import org.tspec.v2.ThaiSymbol
 
 class Scenario {
 
-    String title    
+	String title    
 	List<Clause> clause = []
 	Binding binding
 
