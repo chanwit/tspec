@@ -69,8 +69,14 @@ class Setup {
             if(!(root instanceof Story))
                 throw new RuntimeException("Story node is required found [${root.class}]");
 
-            root.scenario << new Scenario(title: s.value, action: s.action)
-            if(trace) println "สถานการณ์" + s.value
+			def currentScenario = new Scenario(title: s.value) 
+            root.scenario << currentScenario
+			if(trace) println "สถานการณ์" + s.value
+			
+			def block = s.action
+			block.delegate = currentScenario
+			block.resolveStrategy = Closure.DELEGATE_FIRST
+			block.call(currentScenario)			
         }
     }
 

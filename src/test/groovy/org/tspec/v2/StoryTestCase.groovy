@@ -17,7 +17,7 @@ abstract class StoryTestCase extends GroovyTestCase {
 		def sh = new GroovyShell(new Binding(), conf)
 		def s = sh.parse(source)
 		s.run()
-		return s.binding.root
+		return s.binding
 	}
 
 }
