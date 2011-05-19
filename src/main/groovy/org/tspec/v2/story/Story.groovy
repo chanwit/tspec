@@ -1,6 +1,6 @@
-package org.tspec.v2.story;
+package org.tspec.v2.story
 
-public class Story {
+class Story {
 
     String title
     List<Scenario> scenario = []
